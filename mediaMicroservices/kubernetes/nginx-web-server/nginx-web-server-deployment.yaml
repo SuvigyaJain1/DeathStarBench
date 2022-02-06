@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+    kompose.version: 1.26.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: nginx-web-server
+  name: nginx-web-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nginx-web-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+        kompose.version: 1.26.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: nginx-web-server
+    spec:
+      containers:
+        - image: yg397/openresty-thrift:xenial
+          name: nginx-web-server
+          ports:
+            - containerPort: 8080
+          resources: {}
+          volumeMounts:
+            - mountPath: /usr/local/openresty/nginx/lua-scripts
+              name: nginx-web-server-hostpath0
+            - mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+              name: nginx-web-server-hostpath1
+            - mountPath: /usr/local/openresty/nginx/jaeger-config.json
+              name: nginx-web-server-hostpath2
+            - mountPath: /gen-lua
+              name: nginx-web-server-hostpath3
+      hostname: nginx-thrift
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: /home/suvigya/Docker/DeathStarBench/mediaMicroservices/nginx-web-server/lua-scripts
+          name: nginx-web-server-hostpath0
+        - hostPath:
+            path: /home/suvigya/Docker/DeathStarBench/mediaMicroservices/nginx-web-server/conf/nginx.conf
+          name: nginx-web-server-hostpath1
+        - hostPath:
+            path: /home/suvigya/Docker/DeathStarBench/mediaMicroservices/nginx-web-server/jaeger-config.json
+          name: nginx-web-server-hostpath2
+        - hostPath:
+            path: /home/suvigya/Docker/DeathStarBench/mediaMicroservices/gen-lua
+          name: nginx-web-server-hostpath3
+status: {}

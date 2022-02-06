@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+    kompose.version: 1.26.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: cast-info-service
+  name: cast-info-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: cast-info-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+        kompose.version: 1.26.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: cast-info-service
+    spec:
+      containers:
+        - command:
+            - CastInfoService
+          image: yg397/media-microservices
+          name: cast-info-service
+          ports:
+            - containerPort: 9090
+          resources: {}
+      hostname: cast-info-service
+      restartPolicy: Always
+status: {}

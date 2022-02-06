@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+    kompose.version: 1.26.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: user-mongodb
+  name: user-mongodb
+spec:
+  ports:
+    - name: "27019"
+      port: 27019
+      targetPort: 27017
+  selector:
+    io.kompose.service: user-mongodb
+status:
+  loadBalancer: {}

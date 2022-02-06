@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+    kompose.version: 1.26.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: movie-info-memcached
+  name: movie-info-memcached
+spec:
+  ports:
+    - name: "11221"
+      port: 11221
+      targetPort: 11211
+  selector:
+    io.kompose.service: movie-info-memcached
+status:
+  loadBalancer: {}

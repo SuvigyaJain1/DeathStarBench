@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+    kompose.version: 1.26.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: plot-service
+  name: plot-service
+spec:
+  ports:
+    - name: "10011"
+      port: 10011
+      targetPort: 9090
+  selector:
+    io.kompose.service: plot-service
+status:
+  loadBalancer: {}

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+    kompose.version: 1.26.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: dns-media
+  name: dns-media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: dns-media
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+        kompose.version: 1.26.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: dns-media
+    spec:
+      containers:
+        - image: defreitas/dns-proxy-server
+          name: dns-media
+          ports:
+            - containerPort: 5380
+          resources: {}
+          volumeMounts:
+            - mountPath: /app/conf
+              name: dns-media-hostpath0
+            - mountPath: /var/run/docker.sock
+              name: dns-media-hostpath1
+            - mountPath: /etc/resolv.conf
+              name: dns-media-hostpath2
+      hostname: dns-media
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: /opt/dns-proxy-server/conf
+          name: dns-media-hostpath0
+        - hostPath:
+            path: /var/run/docker.sock
+          name: dns-media-hostpath1
+        - hostPath:
+            path: /etc/resolv.conf
+          name: dns-media-hostpath2
+status: {}

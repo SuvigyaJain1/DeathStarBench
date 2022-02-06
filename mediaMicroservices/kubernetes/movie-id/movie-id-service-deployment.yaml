@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+    kompose.version: 1.26.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: movie-id-service
+  name: movie-id-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: movie-id-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+        kompose.version: 1.26.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: movie-id-service
+    spec:
+      containers:
+        - command:
+            - MovieIdService
+          image: yg397/media-microservices
+          name: movie-id-service
+          ports:
+            - containerPort: 9090
+          resources: {}
+      hostname: movie-id-service
+      restartPolicy: Always
+status: {}

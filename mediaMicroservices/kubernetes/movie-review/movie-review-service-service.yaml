@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath --file mediaMicroservices/docker-compose.yml
+    kompose.version: 1.26.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: movie-review-service
+  name: movie-review-service
+spec:
+  ports:
+    - name: "10009"
+      port: 10009
+      targetPort: 9090
+  selector:
+    io.kompose.service: movie-review-service
+status:
+  loadBalancer: {}
