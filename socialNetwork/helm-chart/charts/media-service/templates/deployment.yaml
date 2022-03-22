@@ -1,0 +1,50 @@
+---
+# Source: social-network/charts/media-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: media-service
+  name: media-service
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: media-service
+  template:
+    metadata:
+      labels:
+        service: media-service
+        app: media-service
+    spec: 
+      shareProcessNamespace: true
+      containers:
+      - name: perf
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - SYS_PTRACE
+        tty: true
+        stdin: true 
+      - name: "media-service"
+        image: docker.io/yg397/social-network-microservices:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9090
+        command: 
+        - MediaService        
+        volumeMounts:
+        - name: media-service-config
+          mountPath: /social-network-microservices/config/jaeger-config.yml
+          subPath: jaeger-config.yml
+        - name: media-service-config
+          mountPath: /social-network-microservices/config/service-config.json
+          subPath: service-config.json
+      volumes:
+      - name: media-service-config
+        configMap:
+          name: media-service
+      hostname: media-service
+      restartPolicy: Always
