@@ -1,0 +1,13 @@
+---
+# Source: social-network/charts/post-storage-mongodb/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: post-storage-mongodb
+  labels:
+    socialnetwork/service: post-storage-mongodb
+data:
+  mongod.conf: |    
+    net:
+      tls:
+        mode: disabled

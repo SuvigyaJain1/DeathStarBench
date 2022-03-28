@@ -1,0 +1,58 @@
+---
+# Source: social-network/charts/jaeger/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: jaeger
+  name: jaeger
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: jaeger
+  template:
+    metadata:
+      labels:
+        service: jaeger
+        app: jaeger
+    spec: 
+      shareProcessNamespace: true
+      containers:
+      - name: perf
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - SYS_PTRACE
+        tty: true
+        stdin: true 
+      - name: "jaeger"
+        image: docker.io/jaegertracing/all-in-one:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5775
+        - containerPort: 6831
+        - containerPort: 6832
+        - containerPort: 5778
+        - containerPort: 16686
+        - containerPort: 14268
+        - containerPort: 9411
+        env:
+        - name: COLLECTOR_ZIPKIN_HTTP_PORT
+          value: "9411"
+                
+        volumeMounts:
+        - name: jaeger-config
+          mountPath: /social-network-microservices/config/jaeger-config.yml
+          subPath: jaeger-config.yml
+        - name: jaeger-config
+          mountPath: /social-network-microservices/config/service-config.json
+          subPath: service-config.json
+      volumes:
+      - name: jaeger-config
+        configMap:
+          name: jaeger
+      hostname: jaeger
+      restartPolicy: Always

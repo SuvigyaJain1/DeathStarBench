@@ -1,0 +1,48 @@
+---
+# Source: social-network/charts/post-storage-mongodb/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: post-storage-mongodb
+  name: post-storage-mongodb
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: post-storage-mongodb
+  template:
+    metadata:
+      labels:
+        service: post-storage-mongodb
+        app: post-storage-mongodb
+    spec: 
+      shareProcessNamespace: true
+      containers:
+      - name: perf
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - SYS_PTRACE
+        tty: true
+        stdin: true 
+      - name: "post-storage-mongodb"
+        image: docker.io/library/mongo:4.4.6
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 27017
+        args:
+        - --config
+        - /social-network-microservices/config/mongod.conf        
+        volumeMounts:
+        - name: post-storage-mongodb-config
+          mountPath: /social-network-microservices/config/mongod.conf
+          subPath: mongod.conf
+      volumes:
+      - name: post-storage-mongodb-config
+        configMap:
+          name: post-storage-mongodb
+      hostname: post-storage-mongodb
+      restartPolicy: Always
