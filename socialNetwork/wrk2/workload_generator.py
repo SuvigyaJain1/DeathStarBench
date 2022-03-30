@@ -3,7 +3,7 @@ import os
 import time
 
 # Address for the master node
-NGINX_URL = "http://165.232.188.194:8080"
+NGINX_URL = "http://165.232.188.194:31111/"
 OUTPUT_DIR = "./outputs"
 
 def run(dist, n_thread, n_conns, dur_sec, script, req_per_sec, filename):
