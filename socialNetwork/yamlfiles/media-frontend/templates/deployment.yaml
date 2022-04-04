@@ -1,0 +1,69 @@
+---
+# Source: social-network/charts/media-frontend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: media-frontend
+  name: media-frontend
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: media-frontend
+  template:
+    metadata:
+      labels:
+        service: media-frontend
+        app: media-frontend
+    spec: 
+      shareProcessNamespace: true
+      containers:
+      - name: perf
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - SYS_PTRACE
+        tty: true
+        stdin: true 
+      - name: "media-frontend"
+        image: docker.io/yg397/media-frontend:xenial
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8081
+        env:
+        - name: fqdn_suffix
+          value: ".default.svc.cluster.local"
+                
+        volumeMounts:
+        - name: media-frontend-config
+          mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+          subPath: nginx.conf
+        - name: media-frontend-config
+          mountPath: /social-network-microservices/config/service-config.json
+          subPath: service-config.json
+        - name: lua-scripts
+          mountPath: /usr/local/openresty/nginx/lua-scripts
+
+      initContainers:
+      - name: "alpine-container"
+        image: docker.io/alpine/git:latest
+        imagePullPolicy: IfNotPresent
+        command: 
+        - /bin/sh
+        args:
+        - -c
+        - git clone https://github.com/delimitrou/DeathStarBench.git /DeathStarBench && cp -r /DeathStarBench/socialNetwork/media-frontend/lua-scripts/* /lua-scripts/        
+        volumeMounts:
+        - name: lua-scripts
+          mountPath: /lua-scripts
+      volumes:
+      - name: media-frontend-config
+        configMap:
+          name: media-frontend
+      - name: lua-scripts
+        emptyDir: {}
+      hostname: media-frontend
+      restartPolicy: Always

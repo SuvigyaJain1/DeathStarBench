@@ -1,0 +1,13 @@
+---
+# Source: social-network/charts/user-mongodb/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-mongodb
+  labels:
+    socialnetwork/service: user-mongodb
+data:
+  mongod.conf: |    
+    net:
+      tls:
+        mode: disabled

@@ -1,0 +1,90 @@
+---
+# Source: social-network/charts/nginx-thrift/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: nginx-thrift
+  name: nginx-thrift
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: nginx-thrift
+  template:
+    metadata:
+      labels:
+        service: nginx-thrift
+        app: nginx-thrift
+    spec: 
+      shareProcessNamespace: true
+      containers:
+      - name: perf
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - SYS_PTRACE
+        tty: true
+        stdin: true 
+      - name: "nginx-thrift"
+        image: docker.io/yg397/openresty-thrift:xenial
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: fqdn_suffix
+          value: ".default.svc.cluster.local"
+                
+        volumeMounts:
+        - name: nginx-thrift-config
+          mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+          subPath: nginx.conf
+        - name: lua-scripts
+          mountPath: /usr/local/openresty/nginx/lua-scripts
+        - name: lua-thrift
+          mountPath: /usr/local/openresty/lualib/thrift
+        - name: pages
+          mountPath: /usr/local/openresty/nginx/pages
+        - name: gen-lua
+          mountPath: /gen-lua
+        - name: keys
+          mountPath: /keys
+
+      initContainers:
+      - name: "alpine-container"
+        image: docker.io/alpine/git:latest
+        imagePullPolicy: IfNotPresent
+        command: 
+        - /bin/sh
+        args:
+        - -c
+        - git clone https://github.com/delimitrou/DeathStarBench.git /DeathStarBench && cp -r /DeathStarBench/socialNetwork/gen-lua/* /gen-lua/ && cp -r /DeathStarBench/socialNetwork/docker/openresty-thrift/lua-thrift/* /lua-thrift/ && cp -r /DeathStarBench/socialNetwork/nginx-web-server/lua-scripts/* /lua-scripts/ && cp -r /DeathStarBench/socialNetwork/nginx-web-server/pages/* /pages/ && cp /DeathStarBench/socialNetwork/keys/* /keys/         
+        volumeMounts:
+        - name: lua-scripts
+          mountPath: /lua-scripts
+        - name: lua-thrift
+          mountPath: /lua-thrift
+        - name: pages
+          mountPath: /pages
+        - name: gen-lua
+          mountPath: /gen-lua
+        - name: keys
+          mountPath: /keys
+      volumes:
+      - name: nginx-thrift-config
+        configMap:
+          name: nginx-thrift
+      - name: lua-scripts
+        emptyDir: {}
+      - name: pages
+        emptyDir: {}
+      - name: gen-lua
+        emptyDir: {}
+      - name: lua-thrift
+        emptyDir: {}
+      - name: keys
+        emptyDir: {}
+      hostname: nginx-thrift
+      restartPolicy: Always

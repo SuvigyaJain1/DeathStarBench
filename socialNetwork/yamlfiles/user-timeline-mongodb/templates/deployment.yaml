@@ -1,0 +1,48 @@
+---
+# Source: social-network/charts/user-timeline-mongodb/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: user-timeline-mongodb
+  name: user-timeline-mongodb
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: user-timeline-mongodb
+  template:
+    metadata:
+      labels:
+        service: user-timeline-mongodb
+        app: user-timeline-mongodb
+    spec: 
+      shareProcessNamespace: true
+      containers:
+      - name: perf
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - SYS_PTRACE
+        tty: true
+        stdin: true 
+      - name: "user-timeline-mongodb"
+        image: docker.io/library/mongo:4.4.6
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 27017
+        args:
+        - --config
+        - /social-network-microservices/config/mongod.conf        
+        volumeMounts:
+        - name: user-timeline-mongodb-config
+          mountPath: /social-network-microservices/config/mongod.conf
+          subPath: mongod.conf
+      volumes:
+      - name: user-timeline-mongodb-config
+        configMap:
+          name: user-timeline-mongodb
+      hostname: user-timeline-mongodb
+      restartPolicy: Always

@@ -1,0 +1,47 @@
+---
+# Source: social-network/charts/text-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: text-service
+  name: text-service
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: text-service
+  template:
+    metadata:
+      labels:
+        service: text-service
+        app: text-service
+    spec: 
+      shareProcessNamespace: true
+      containers:
+      - name: perf
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - SYS_PTRACE
+        tty: true
+        stdin: true 
+      - name: "text-service"
+        image: docker.io/yg397/social-network-microservices:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9090
+        command: 
+        - TextService        
+        volumeMounts:
+        - name: text-service-config
+          mountPath: /social-network-microservices/config/service-config.json
+          subPath: service-config.json
+      volumes:
+      - name: text-service-config
+        configMap:
+          name: text-service
+      hostname: text-service
+      restartPolicy: Always

@@ -1,0 +1,19 @@
+---
+# Source: social-network/charts/user-timeline-redis/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-timeline-redis
+  labels:
+    socialnetwork/service: user-timeline-redis
+data:
+  redis.conf: |    
+    io-threads 8
+    io-threads-do-reads yes
+    port 6379
+    tls-port 0
+    
+    tls-cert-file /keys/server.crt
+    tls-key-file /keys/server.key
+    
+    tls-auth-clients no

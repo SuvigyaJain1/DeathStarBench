@@ -1,0 +1,45 @@
+---
+# Source: social-network/charts/post-storage-memcached/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: post-storage-memcached
+  name: post-storage-memcached
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: post-storage-memcached
+  template:
+    metadata:
+      labels:
+        service: post-storage-memcached
+        app: post-storage-memcached
+    spec: 
+      shareProcessNamespace: true
+      containers:
+      - name: perf
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - SYS_PTRACE
+        tty: true
+        stdin: true 
+      - name: "post-storage-memcached"
+        image: docker.io/library/memcached:1.6.7
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 11211        
+        volumeMounts:
+        - name: post-storage-memcached-config
+          mountPath: /social-network-microservices/config/service-config.json
+          subPath: service-config.json
+      volumes:
+      - name: post-storage-memcached-config
+        configMap:
+          name: post-storage-memcached
+      hostname: post-storage-memcached
+      restartPolicy: Always

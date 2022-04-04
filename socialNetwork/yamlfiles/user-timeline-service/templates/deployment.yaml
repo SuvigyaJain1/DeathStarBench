@@ -1,0 +1,47 @@
+---
+# Source: social-network/charts/user-timeline-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: user-timeline-service
+  name: user-timeline-service
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: user-timeline-service
+  template:
+    metadata:
+      labels:
+        service: user-timeline-service
+        app: user-timeline-service
+    spec: 
+      shareProcessNamespace: true
+      containers:
+      - name: perf
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - SYS_PTRACE
+        tty: true
+        stdin: true 
+      - name: "user-timeline-service"
+        image: docker.io/yg397/social-network-microservices:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9090
+        command: 
+        - UserTimelineService        
+        volumeMounts:
+        - name: user-timeline-service-config
+          mountPath: /social-network-microservices/config/service-config.json
+          subPath: service-config.json
+      volumes:
+      - name: user-timeline-service-config
+        configMap:
+          name: user-timeline-service
+      hostname: user-timeline-service
+      restartPolicy: Always
