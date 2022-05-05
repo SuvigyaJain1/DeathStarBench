@@ -15,22 +15,22 @@ else
         NODE_IP=$1
 
         sudo apt-get update && apt-get upgrade -y
-        sudo apt-get install docker.io
+        # sudo apt-get install docker.io
         sudo apt-get install -y apt-transport-https ca-certificates curl 
         sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
         echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
         sudo apt-get update
         sudo apt-get install -y kubelet kubeadm kubectl
-#        sudo apt-mark hold kubelet kubeadm kubectl
+        sudo apt-mark hold kubelet kubeadm kubectl
 
-        # Changing C-group driver
-        su -c "touch /etc/docker/daemon.json"
-        su -c "echo '{ 
-        "exec-opts": ["native.cgroupdriver=systemd"]
-        }'| sudo cat > /etc/docker/daemon.json"
-        sudo systemctl daemon-reload
-        sudo systemctl restart docker
-        sudo systemctl restart kubelet
+        ## Changing C-group driver
+        # su -c "touch /etc/docker/daemon.json"
+        # su -c "echo '{ 
+        # "exec-opts": ["native.cgroupdriver=systemd"]
+        # }'| sudo cat > /etc/docker/daemon.json"
+        # sudo systemctl daemon-reload
+        # sudo systemctl restart docker
+        # sudo systemctl restart kubelet
 
         sudo usermod -aG docker $USER
 
