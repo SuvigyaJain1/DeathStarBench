@@ -28,3 +28,6 @@ else
 
     kubeadm join $MASTER_IP --token $TOKEN --discovery-token-ca-cert-hash $HASH
 fi
+
+# kubeadm join 10.190.0.2:6443 --token g08c78.8by69b718yuqtfk8 \
+# --discovery-token-ca-cert-hash sha256:b49c336321f928f2ee0821640dfb8b28ca1280a2d23c128cecf1a5b3e01498a4 

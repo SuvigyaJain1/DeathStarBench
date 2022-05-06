@@ -1,6 +1,6 @@
 # DeathStarBench
 
-Open-source benchmark suite for cloud microservices. DeathStarBench includes five end-to-end services, four for cloud systems, and one for cloud-edge systems running on drone swarms. 
+Open-Source benchmark suite for cloud microservices. DeathStarBench includes five end-to-end services, four for cloud systems, and one for cloud-edge systems running on drone swarms. 
 
 ## End-to-end Services <img src="microservices_bundle4.png" alt="suite-icon" width="40"/>
 
