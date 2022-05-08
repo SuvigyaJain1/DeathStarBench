@@ -1,0 +1,23 @@
+#digital ocean cluster
+https://cloud.digitalocean.com/kubernetes/clusters/0296e24a-c3ee-4ed2-a2ca-9b5d986a3095/db/dcde7bf1-3741-4ff2-9fe1-d9e0bfef8f70/#/overview?namespace=_all
+
+# pods are deployed
+kubectl get pods
+
+#access url from frontend
+frontend link - http://128.199.25.250:31111
+
+# wrk demo
+wrk -D norm -t 2 -c 100 -d 20s -L -s /home/surpeeth/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua http://128.199.25.250:31111/wrk2-api/home-timeline/read -R 200
+
+# inject istio
+kubectl label namespace default istio-injection=enabled --overwrite
+
+# move to deployements
+cd /home/surpeeth/DeathStarBench/socialNetwork/helm-chart/charts
+
+# delete current deployment
+kubectl delete -Rf .
+
+# apply injected deployment
+kubectl apply -Rf .

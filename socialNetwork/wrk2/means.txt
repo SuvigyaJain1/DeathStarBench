@@ -1,7 +1,31 @@
 
-outputs/rps_20/1:35909.749
-outputs/rps_20/0:35909.749
-outputs/rps_100/1:30012.211
-outputs/rps_100/0:30012.211
-outputs/rps_50/1:30009.262
-outputs/rps_50/0:30009.262
+custom-scripts/outputs-with-istio//rps_50/0:Mean    =       69.698,
+custom-scripts/outputs-with-istio//rps_50/1:Mean    =       62.250,
+custom-scripts/outputs-with-istio//rps_50/3:Mean    =       75.846,
+custom-scripts/outputs-with-istio//rps_50/2:Mean    =       40.684,
+custom-scripts/outputs-with-istio//rps_50/4:Mean    =       46.461,
+custom-scripts/outputs-with-istio//rps_500/0:Mean    =       88.237,
+custom-scripts/outputs-with-istio//rps_500/1:Mean    =       74.350,
+custom-scripts/outputs-with-istio//rps_500/3:Mean    =       84.814,
+custom-scripts/outputs-with-istio//rps_500/2:Mean    =       77.949,
+custom-scripts/outputs-with-istio//rps_500/4:Mean    =       71.674,
+custom-scripts/outputs-with-istio//rps_1000/0:Mean    =     6989.017,
+custom-scripts/outputs-with-istio//rps_1000/1:Mean    =     7071.376,
+custom-scripts/outputs-with-istio//rps_1000/3:Mean    =     8553.707,
+custom-scripts/outputs-with-istio//rps_1000/2:Mean    =    10035.808,
+custom-scripts/outputs-with-istio//rps_1000/4:Mean    =     7254.841,
+custom-scripts/outputs-with-istio//rps_100/0:Mean    =       74.803,
+custom-scripts/outputs-with-istio//rps_100/1:Mean    =       85.811,
+custom-scripts/outputs-with-istio//rps_100/3:Mean    =       64.635,
+custom-scripts/outputs-with-istio//rps_100/2:Mean    =       90.471,
+custom-scripts/outputs-with-istio//rps_100/4:Mean    =       64.501,
+custom-scripts/outputs-with-istio//rps_200/0:Mean    =       81.110,
+custom-scripts/outputs-with-istio//rps_200/1:Mean    =       62.197,
+custom-scripts/outputs-with-istio//rps_200/3:Mean    =       71.207,
+custom-scripts/outputs-with-istio//rps_200/2:Mean    =       72.805,
+custom-scripts/outputs-with-istio//rps_200/4:Mean    =       62.445,
+custom-scripts/outputs-with-istio//rps_20/0:Mean    =       59.624,
+custom-scripts/outputs-with-istio//rps_20/1:Mean    =       44.826,
+custom-scripts/outputs-with-istio//rps_20/3:Mean    =       97.308,
+custom-scripts/outputs-with-istio//rps_20/2:Mean    =       81.626,
+custom-scripts/outputs-with-istio//rps_20/4:Mean    =       82.236,
