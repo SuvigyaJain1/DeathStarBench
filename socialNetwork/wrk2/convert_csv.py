@@ -1,7 +1,8 @@
 import os
+import sys
 from csv import DictWriter
 
-FOLDER='outputs-without-istio'
+FOLDER=sys.argv[1]
 
 def apply_grep(filepath, pattern):
     cmd = f"grep -P '{pattern}' -H -o {FOLDER}/{filepath} >> ./means.txt"
@@ -24,8 +25,10 @@ with open("./means.txt", "r") as f:
     for line in lines:
         file, mean = line.split(':', maxsplit=1)
         mean = mean.split('=')[1].strip()[:-1]
-        _, rps, idx = file.split('/', maxsplit=2)
+        idx = file.split('/')[-1]
+        rps = file.split('/')[-2]        
         data_dict.append({"rps":rps, "idx":idx, "mean":mean})
+
 print(data_dict)
 
 with open("output.csv", 'w') as f:
