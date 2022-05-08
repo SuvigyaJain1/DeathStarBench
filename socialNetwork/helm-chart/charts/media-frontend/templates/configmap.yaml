@@ -132,7 +132,7 @@ data:
       }
     }
   jaeger-config.yml: |    
-    disabled: false
+    disabled: true
     reporter:
       logSpans: false
       localAgentHostPort: "jaeger:6831"

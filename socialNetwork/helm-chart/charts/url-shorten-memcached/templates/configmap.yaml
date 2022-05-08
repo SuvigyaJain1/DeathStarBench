@@ -8,7 +8,7 @@ metadata:
     socialnetwork/service: url-shorten-memcached
 data:
   jaeger-config.yml: |    
-    disabled: false
+    disabled: true
     reporter:
       logSpans: false
       localAgentHostPort: "jaeger:6831"
