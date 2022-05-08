@@ -4,7 +4,7 @@ import time
 
 # Address for the master node
 NGINX_URL = "http://128.199.25.250:31111"
-OUTPUT_DIR = "./outputs"
+OUTPUT_DIR = "./outputs-without-istio"
 
 def run(dist, n_thread, n_conns, dur_sec, script, req_per_sec, filename):
         cmd = f"wrk -D {dist} -t {n_thread} -c {n_conns} -d {dur_sec}s -L -s {script} {NGINX_URL}/wrk2-api/home-timeline/read -R {req_per_sec} > {OUTPUT_DIR}/{filename}"
