@@ -59,7 +59,7 @@ EOF
         # [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
         #     SystemdCgroup = true
 
-        sudo kubeadm init --config kubeadm-config.yaml
+        sudo kubeadm init --config kubeadm-config.yaml | sudo tee ~/join.txt
         
         mkdir -p $HOME/.kube
         sudo cp  /etc/kubernetes/admin.conf $HOME/.kube/config

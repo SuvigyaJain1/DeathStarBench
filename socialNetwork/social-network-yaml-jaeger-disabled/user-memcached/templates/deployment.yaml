@@ -19,15 +19,7 @@ spec:
     spec: 
       shareProcessNamespace: true
       containers:
-      - name: perf
-        image: suvigyajain1/perf
-        securityContext:
-          privileged: true
-          capabilities:
-            add:
-            - SYS_PTRACE
-        tty: true
-        stdin: true 
+ 
       - name: "user-memcached"
         image: docker.io/library/memcached:1.6.7
         imagePullPolicy: IfNotPresent

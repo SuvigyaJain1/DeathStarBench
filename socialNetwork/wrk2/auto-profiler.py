@@ -4,16 +4,26 @@ import time
 import csv
 
 # Address for the master node
-NGINX_URL = "http://128.199.25.250:31111"
-OUTPUT_DIR = "./outputs"
+NGINX_URL = "http://localhost:31111"
+OUTPUT_DIR = "./auto-outputs"
 
 TO_STRING = ["Distribution", "Threads", "Connections(s)", "Duration", "Script", "Endpoint", "Requests Per Second"]
 PARAMS_LIST = [
-    ["fixed", 2, 100, 60,  "/home/surpeeth/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/post/compose", 10],
-    ["fixed", 2, 100, 60,  "/home/surpeeth/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/read-timeline/home", 10]
-]
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 100],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 200],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 300],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 400],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 400],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 400],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 500],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 600],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 700],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 800],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 900],
+    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000]
+] # fixed connections, varying rps 100-1000
 
-OBSERVABLES = [2,3]
+OBSERVABLES = [2,3,6]
 HEADERS = ['Run ID', 'Command Number'] + [TO_STRING[i] for i in OBSERVABLES] + ['Mean', 'StdDeviation', 'Max', 'Total count', 'Buckets', 'SubBuckets']
 NUM_RUNS = 2
 
@@ -38,8 +48,11 @@ def parse_file(run_id, data, file):
                 parse(run_id, data, line)
 
 def run(dist, n_thread, n_conns, dur_sec, script, endpoint, req_per_sec, path):
-        cmd = f"wrk -D {dist} -t {n_thread} -c {n_conns} -d {dur_sec}s -L -s {script} {NGINX_URL}/{endpoint} -R {req_per_sec} > {path}"
+        cmd = f' ./wrk -D {dist} -t {n_thread} -c {n_conns} -d {dur_sec}s -L -s {script} {NGINX_URL}/{endpoint} -R {req_per_sec} > {path}'
+        print(cmd)
         os.system(cmd)
+        print("exited")
+        time.sleep(1)
         # os.system(f"cp ./wrk-output.txt {path}")
         # print(cmd)
 
