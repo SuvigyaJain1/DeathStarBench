@@ -10,10 +10,33 @@ NGINX_URL = "http://localhost:31111"
 OUTPUT_DIR = "./test-run"
 
 TO_STRING = ["Distribution", "Threads", "Connections(s)", "Duration", "Script", "Endpoint", "Requests Per Second"]
-PARAMS_LIST = [
+PARAMS_LIST = PARAMS_LIST = [
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 10],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 100],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 500],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 2000],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 3000],
     ["fixed", 1, 1, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
-    ["fixed", 2, 2, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 700],
-    ["fixed", 4, 4, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 100],
+    ["fixed", 2, 2, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+    ["fixed", 4, 4, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+    ["fixed", 8, 8, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+    ["fixed", 8, 32, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+    ["fixed", 8, 64, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 10],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 100],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 500],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 2000],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 3000],
+    ["fixed", 1, 1, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
+    ["fixed", 2, 2, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
+    ["fixed", 4, 4, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
+    ["fixed", 8, 8, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
+    ["fixed", 8, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
+    ["fixed", 8, 32, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
+    ["fixed", 8, 64, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
 ]
 OBSERVABLES = [2,4,6]
 HEADERS = ['Run ID', 'Command Number'] + [TO_STRING[i] for i in OBSERVABLES] + ['Mean', 'StdDeviation', 'Max', 'Total count', 'Buckets', 'SubBuckets', 'P50', 'P75', 'P90', 'P99', 'P99.9', 'P99.99', 'P99.999']
