@@ -1,4 +1,4 @@
-from msilib.schema import File
+# from msilib.schema import File
 import subprocess
 import os
 import time
@@ -7,15 +7,15 @@ import re
 
 # Address for the master node
 NGINX_URL = "http://localhost:31111"
-OUTPUT_DIR = "./outputs-directory-2230-rerun"
+OUTPUT_DIR = "./test-run"
 
 TO_STRING = ["Distribution", "Threads", "Connections(s)", "Duration", "Script", "Endpoint", "Requests Per Second"]
 PARAMS_LIST = [
     ["fixed", 1, 1, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
-    ["fixed", 2, 2, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
-    ["fixed", 4, 4, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+    ["fixed", 2, 2, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 700],
+    ["fixed", 4, 4, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 100],
 ]
-OBSERVABLES = [2,3,6]
+OBSERVABLES = [2,4,6]
 HEADERS = ['Run ID', 'Command Number'] + [TO_STRING[i] for i in OBSERVABLES] + ['Mean', 'StdDeviation', 'Max', 'Total count', 'Buckets', 'SubBuckets', 'P50', 'P75', 'P90', 'P99', 'P99.9', 'P99.99', 'P99.999']
 NUM_RUNS = 3
 
@@ -33,21 +33,20 @@ def parse(run_id, data, line):
         key, value = key.strip(), value.strip()
         data[key] = float(value)
 
-def parse_latency(f: File):
+def parse_latency(f):
     output = f.read()
     latency = re.findall(r"Latency Distribution [.\n\s\S]*100.000\%.*s", output)[0]
     latencies = re.findall(r"[0-9]*\.[0-9]*\%.*", latency)
     latencies = list(map(lambda x: x.strip().split()[1], latencies))
     return latencies
 
-def parse_file(run_id, data, file):
-    
+def parse_file(run_id, data, file): 
     with open (file) as f:
         latencies = parse_latency(f)
         headers = ['P50', 'P75', 'P90', 'P99', 'P99.9', 'P99.99', 'P99.999']
         for i in range(len(headers)):
             data[headers[i]] = latencies[i]
-            
+        f.seek(0)
         for line in f:
             if line[0] == '#':
                 parse(run_id, data, line)
