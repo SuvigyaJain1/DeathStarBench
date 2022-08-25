@@ -5,27 +5,17 @@ import csv
 
 # Address for the master node
 NGINX_URL = "http://localhost:31111"
-OUTPUT_DIR = "./auto-outputs"
+OUTPUT_DIR = "./outputs-directory-2230-rerun"
 
 TO_STRING = ["Distribution", "Threads", "Connections(s)", "Duration", "Script", "Endpoint", "Requests Per Second"]
 PARAMS_LIST = [
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 100],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 200],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 300],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 400],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 400],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 400],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 500],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 600],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 700],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 800],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 900],
-    ["fixed", 4, 16, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000]
-] # fixed connections, varying rps 100-1000
-
+    ["fixed", 1, 1, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+    ["fixed", 2, 2, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+    ["fixed", 4, 4, 60,  "/home/user/DeathStarBench/socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
+]
 OBSERVABLES = [2,3,6]
 HEADERS = ['Run ID', 'Command Number'] + [TO_STRING[i] for i in OBSERVABLES] + ['Mean', 'StdDeviation', 'Max', 'Total count', 'Buckets', 'SubBuckets']
-NUM_RUNS = 2
+NUM_RUNS = 3
 
 FOLDER_ID = 0
 FILE_ID = 0
