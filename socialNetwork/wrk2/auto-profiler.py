@@ -7,7 +7,7 @@ import re
 
 # Address for the master node
 NGINX_URL = "http://localhost:31111"
-OUTPUT_DIR = "./test-run"
+OUTPUT_DIR = "./test-run-with-istio-final"
 
 TO_STRING = ["Distribution", "Threads", "Connections(s)", "Duration", "Script", "Endpoint", "Requests Per Second"]
 PARAMS_LIST = PARAMS_LIST = [

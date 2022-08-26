@@ -48,4 +48,3 @@ kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator
 kubectl create -f https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml
 
 echo "Finished Master Node Installation"
-watch kubectl get pods
