@@ -7,7 +7,7 @@ import re
 
 # Address for the master node
 NGINX_URL = "http://143.110.248.178:31111"
-OUTPUT_DIR = "./digital-ocean1"
+OUTPUT_DIR = "./digital-ocean-istio1"
 
 TO_STRING = ["Distribution", "Threads", "Connections(s)", "Duration", "Script", "Endpoint", "Requests Per Second"]
 PARAMS_LIST = PARAMS_LIST = [
@@ -114,7 +114,7 @@ def main():
             data['Command Number'] = FOLDER_ID
             populate_observables(run_id, data, params)
             path = get_path(folder, run_id)
-            #run(dist, n_thread, n_conns, dur_sec, script, endpoint, rps, path)
+            run(dist, n_thread, n_conns, dur_sec, script, endpoint, rps, path)
             parse_file(run_id, data, path)
             rows.append(data)
 
