@@ -1,0 +1,80 @@
+Running 1m test @ http://143.110.248.178:31111/wrk2-api/home-timeline/read
+  8 threads and 16 connections
+  Thread calibration: mean lat.: 57.478ms, rate sampling interval: 293ms
+  Thread calibration: mean lat.: 57.309ms, rate sampling interval: 292ms
+  Thread calibration: mean lat.: 57.724ms, rate sampling interval: 297ms
+  Thread calibration: mean lat.: 57.995ms, rate sampling interval: 294ms
+  Thread calibration: mean lat.: 56.687ms, rate sampling interval: 296ms
+  Thread calibration: mean lat.: 58.098ms, rate sampling interval: 295ms
+  Thread calibration: mean lat.: 59.305ms, rate sampling interval: 307ms
+  Thread calibration: mean lat.: 58.254ms, rate sampling interval: 295ms
+  Thread Stats   Avg      Stdev     99%   +/- Stdev
+    Latency    23.09ms   17.33ms  93.50ms   91.00%
+    Req/Sec     0.89      2.12     6.00     85.51%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%   17.41ms
+ 75.000%   28.77ms
+ 90.000%   38.05ms
+ 99.000%   93.50ms
+ 99.900%  102.40ms
+ 99.990%  102.40ms
+ 99.999%  102.40ms
+100.000%  102.40ms
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+       5.703     0.000000            1         1.00
+      10.007     0.100000           40         1.11
+      11.375     0.200000           80         1.25
+      13.103     0.300000          120         1.43
+      14.759     0.400000          160         1.67
+      17.407     0.500000          200         2.00
+      18.527     0.550000          220         2.22
+      20.287     0.600000          240         2.50
+      21.967     0.650000          260         2.86
+      26.223     0.700000          280         3.33
+      28.767     0.750000          300         4.00
+      29.551     0.775000          310         4.44
+      30.255     0.800000          320         5.00
+      31.199     0.825000          330         5.71
+      32.383     0.850000          340         6.67
+      36.735     0.875000          350         8.00
+      37.247     0.887500          355         8.89
+      38.047     0.900000          360        10.00
+      39.135     0.912500          365        11.43
+      45.695     0.925000          370        13.33
+      59.199     0.937500          375        16.00
+      59.615     0.943750          378        17.78
+      59.903     0.950000          380        20.00
+      60.223     0.956250          383        22.86
+      75.839     0.962500          385        26.67
+      77.823     0.968750          388        32.00
+      80.127     0.971875          389        35.56
+      80.767     0.975000          390        40.00
+      86.719     0.978125          392        45.71
+      87.487     0.981250          393        53.33
+      87.679     0.984375          394        64.00
+      91.839     0.985938          395        71.11
+      91.839     0.987500          395        80.00
+      93.503     0.989062          396        91.43
+      96.255     0.990625          397       106.67
+      96.255     0.992188          397       128.00
+      97.407     0.992969          398       142.22
+      97.407     0.993750          398       160.00
+      97.407     0.994531          398       182.86
+     102.079     0.995313          399       213.33
+     102.079     0.996094          399       256.00
+     102.079     0.996484          399       284.44
+     102.079     0.996875          399       320.00
+     102.079     0.997266          399       365.71
+     102.399     0.997656          400       426.67
+     102.399     1.000000          400          inf
+#[Mean    =       23.094, StdDeviation   =       17.335]
+#[Max     =      102.336, Total count    =          400]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  465 requests in 1.00m, 90.37KB read
+  Socket errors: connect 0, read 0, write 0, timeout 53
+Requests/sec:      7.75
+Transfer/sec:      1.51KB
