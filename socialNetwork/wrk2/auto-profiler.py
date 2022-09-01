@@ -7,7 +7,7 @@ import re
 
 # Address for the master node
 NGINX_URL = "http://localhost:31111"
-OUTPUT_DIR = "./test-run-with-istio-final"
+OUTPUT_DIR = "./reversed-run-with-istio"
 
 TO_STRING = ["Distribution", "Threads", "Connections(s)", "Duration", "Script", "Endpoint", "Requests Per Second"]
 PARAMS_LIST = PARAMS_LIST = [
@@ -104,6 +104,8 @@ def populate_observables(run_id, data, params):
         data[TO_STRING[factor]] = params[factor]
 
 def main():
+    PARAMS_LIST.reverse()
+    print("params list reversed")
     for params in PARAMS_LIST:
         dist, n_thread, n_conns, dur_sec, script, endpoint, rps = params
         folder = get_folder()

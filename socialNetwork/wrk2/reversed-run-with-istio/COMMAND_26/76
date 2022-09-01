@@ -1,0 +1,35 @@
+Running 10s test @ http://localhost:31111/wrk2-api/home-timeline/read
+  8 threads and 16 connections
+  Thread calibration: mean lat.: 1.536ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.708ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.500ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.987ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.292ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.610ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.150ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.214ms, rate sampling interval: 10ms
+  Thread Stats   Avg      Stdev     99%   +/- Stdev
+    Latency     -nanus    -nanus   0.00us    0.00%
+    Req/Sec       -nan      -nan   0.00      0.00%
+  Latency Distribution (HdrHistogram - Recorded Latency)
+ 50.000%    0.00us
+ 75.000%    0.00us
+ 90.000%    0.00us
+ 99.000%    0.00us
+ 99.900%    0.00us
+ 99.990%    0.00us
+ 99.999%    0.00us
+100.000%    0.00us
+
+  Detailed Percentile spectrum:
+       Value   Percentile   TotalCount 1/(1-Percentile)
+
+       0.000     1.000000            0          inf
+#[Mean    =         -nan, StdDeviation   =         -nan]
+#[Max     =        0.000, Total count    =            0]
+#[Buckets =           27, SubBuckets     =         2048]
+----------------------------------------------------------
+  64 requests in 10.00s, 12.44KB read
+  Socket errors: connect 0, read 0, write 0, timeout 33
+Requests/sec:      6.40
+Transfer/sec:      1.24KB
