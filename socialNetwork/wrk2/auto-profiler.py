@@ -7,11 +7,11 @@ import re
 
 # Address for the master node
 NGINX_URL = "http://localhost:31111"
-OUTPUT_DIR = "./reversed-run-with-istio"
+OUTPUT_DIR = "./test-run-721"
 
 TO_STRING = ["Distribution", "Threads", "Connections(s)", "Duration", "Script", "Endpoint", "Requests Per Second"]
 PARAMS_LIST = PARAMS_LIST = [
-    ["fixed", 8, 16, 10,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 10],
+    ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 10],
     ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 100],
     ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 200],
     ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 500],
@@ -80,7 +80,7 @@ def run(dist, n_thread, n_conns, dur_sec, script, endpoint, req_per_sec, path):
         print(cmd)
         os.system(cmd)
         print("exited")
-        time.sleep(1)
+        time.sleep(10)
         # os.system(f"cp ./wrk-output.txt {path}")
         # print(cmd)
 
@@ -104,8 +104,8 @@ def populate_observables(run_id, data, params):
         data[TO_STRING[factor]] = params[factor]
 
 def main():
-    PARAMS_LIST.reverse()
-    print("params list reversed")
+    # PARAMS_LIST.reverse()
+    # print("params list reversed")
     for params in PARAMS_LIST:
         dist, n_thread, n_conns, dur_sec, script, endpoint, rps = params
         folder = get_folder()

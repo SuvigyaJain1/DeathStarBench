@@ -1,0 +1,2 @@
+alias csv="column -s, -t <"
+alias csv="column -s, -t <"
