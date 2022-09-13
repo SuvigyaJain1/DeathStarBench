@@ -47,4 +47,9 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
 kubectl create -f https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml
 
+curl -L https://istio.io/downloadIstio | sh -
+export PATH="$PATH:/home/user/DeathStarBench/istio-1.15.0/bin"
+istioctl install
+
+
 echo "Finished Master Node Installation"

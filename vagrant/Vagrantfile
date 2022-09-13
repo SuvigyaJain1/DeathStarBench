@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
     master.vm.provider "libvirt" do |libvirt|
         libvirt.memory = 4096
-        libvirt.cpus = 4
+        libvirt.cpus = 2
     end
     master.vm.provision "shell", path: "scripts/master.sh"
   end
@@ -33,8 +33,8 @@ Vagrant.configure("2") do |config|
     node.vm.network "private_network", ip: IP_NW + "#{IP_START + i}"
 
     node.vm.provider "libvirt" do |libvirt|
-        libvirt.memory = 15360
-        libvirt.cpus = 8
+        libvirt.memory = 4096
+        libvirt.cpus = 2
     end
     node.vm.provision "shell", path: "scripts/node.sh"
   end

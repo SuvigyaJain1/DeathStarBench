@@ -7,23 +7,10 @@ import re
 
 # Address for the master node
 NGINX_URL = "http://localhost:31111"
-OUTPUT_DIR = "./test-run-721"
+OUTPUT_DIR = "./test-run-11th-sept-1"
 
 TO_STRING = ["Distribution", "Threads", "Connections(s)", "Duration", "Script", "Endpoint", "Requests Per Second"]
 PARAMS_LIST = PARAMS_LIST = [
-    ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 10],
-    ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 100],
-    ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 200],
-    ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 500],
-    ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 750],
-    ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
-    ["fixed", 1, 1, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
-    ["fixed", 2, 2, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
-    ["fixed", 4, 4, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
-    ["fixed", 8, 8, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
-    ["fixed", 8, 16, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
-    ["fixed", 8, 32, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
-    ["fixed", 8, 64, 60,  "scripts/social-network/read-home-timeline.lua", "wrk2-api/home-timeline/read", 1000],
     ["fixed", 8, 16, 60,  "scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 10],
     ["fixed", 8, 16, 60,  "scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 100],
     ["fixed", 8, 16, 60,  "scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 200],
@@ -37,6 +24,19 @@ PARAMS_LIST = PARAMS_LIST = [
     ["fixed", 8, 16, 60,  "scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
     ["fixed", 8, 32, 60,  "scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
     ["fixed", 8, 64, 60,  "scripts/social-network/compose-post.lua", "wrk2-api/post/compose", 1000],
+    ["fixed", 8, 16, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 10],
+    ["fixed", 8, 16, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 100],
+    ["fixed", 8, 16, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 200],
+    ["fixed", 8, 16, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 500],
+    ["fixed", 8, 16, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 750],
+    ["fixed", 8, 16, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 1000],
+    ["fixed", 1, 1, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 1000],
+    ["fixed", 2, 2, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 1000],
+    ["fixed", 4, 4, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 1000],
+    ["fixed", 8, 8, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 1000],
+    ["fixed", 8, 16, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 1000],
+    ["fixed", 8, 32, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 1000],
+    ["fixed", 8, 64, 60,  "scripts/social-network/read-user-timeline.lua", "wrk2-api/user-timeline/read", 1000],
 ]
 OBSERVABLES = [2,4,6]
 HEADERS = ['Run ID', 'Command Number'] + [TO_STRING[i] for i in OBSERVABLES] + ['Mean', 'StdDeviation', 'Max', 'Total count', 'Buckets', 'SubBuckets', 'P50', 'P75', 'P90', 'P99', 'P99.9', 'P99.99', 'P99.999']
@@ -104,7 +104,7 @@ def populate_observables(run_id, data, params):
         data[TO_STRING[factor]] = params[factor]
 
 def main():
-    # PARAMS_LIST.reverse()
+    # PARAMS_LIST.se()
     # print("params list reversed")
     for params in PARAMS_LIST:
         dist, n_thread, n_conns, dur_sec, script, endpoint, rps = params
