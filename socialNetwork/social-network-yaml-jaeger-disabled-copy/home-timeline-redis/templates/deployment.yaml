@@ -1,0 +1,52 @@
+---
+# Source: social-network/charts/home-timeline-redis/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: home-timeline-redis
+  name: home-timeline-redis
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: home-timeline-redis
+  template:
+    metadata:
+      labels:
+        service: home-timeline-redis
+        app: home-timeline-redis
+    spec: 
+      shareProcessNamespace: true
+      containers:
+
+      - name: "perf"
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add: 
+            - SYS_PTRACE
+        tty: true
+        stdin: true
+ 
+      - name: "home-timeline-redis"
+        image: docker.io/library/redis:6.2.4
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6379
+        args:
+        - /social-network-microservices/config/redis.conf
+        securityContext:
+          capabilities:
+            add: ["SYS_ADMIN"]        
+        volumeMounts:
+        - name: home-timeline-redis-config
+          mountPath: /social-network-microservices/config/redis.conf
+          subPath: redis.conf
+      volumes:
+      - name: home-timeline-redis-config
+        configMap:
+          name: home-timeline-redis
+      hostname: home-timeline-redis
+      restartPolicy: Always

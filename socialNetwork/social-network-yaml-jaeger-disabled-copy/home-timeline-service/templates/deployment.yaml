@@ -1,0 +1,54 @@
+---
+# Source: social-network/charts/home-timeline-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: home-timeline-service
+  name: home-timeline-service
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: home-timeline-service
+  template:
+    metadata:
+      labels:
+        service: home-timeline-service
+        app: home-timeline-service
+    spec: 
+      shareProcessNamespace: true
+      containers:
+      - name: "perf"
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add: 
+            - SYS_PTRACE
+        tty: true
+        stdin: true
+ 
+      - name: "home-timeline-service"
+        image: docker.io/yg397/social-network-microservices:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9090
+        command: 
+        - HomeTimelineService    
+        securityContext:
+          capabilities:
+            add: ["SYS_ADMIN"]    
+        volumeMounts:
+        - name: home-timeline-service-config
+          mountPath: /social-network-microservices/config/jaeger-config.yml
+          subPath: jaeger-config.yml
+        - name: home-timeline-service-config
+          mountPath: /social-network-microservices/config/service-config.json
+          subPath: service-config.json
+      volumes:
+      - name: home-timeline-service-config
+        configMap:
+          name: home-timeline-service
+      hostname: home-timeline-service
+      restartPolicy: Always

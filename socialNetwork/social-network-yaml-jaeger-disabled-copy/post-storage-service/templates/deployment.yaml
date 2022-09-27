@@ -1,0 +1,55 @@
+---
+# Source: social-network/charts/post-storage-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: post-storage-service
+  name: post-storage-service
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: post-storage-service
+  template:
+    metadata:
+      labels:
+        service: post-storage-service
+        app: post-storage-service
+    spec: 
+      shareProcessNamespace: true
+      containers:
+
+      - name: "perf"
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add: 
+            - SYS_PTRACE
+        tty: true
+        stdin: true
+ 
+      - name: "post-storage-service"
+        image: docker.io/yg397/social-network-microservices:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9090
+        command: 
+        - PostStorageService      
+        securityContext:
+          capabilities:
+            add: ["SYS_ADMIN"]  
+        volumeMounts:
+        - name: post-storage-service-config
+          mountPath: /social-network-microservices/config/jaeger-config.yml
+          subPath: jaeger-config.yml
+        - name: post-storage-service-config
+          mountPath: /social-network-microservices/config/service-config.json
+          subPath: service-config.json
+      volumes:
+      - name: post-storage-service-config
+        configMap:
+          name: post-storage-service
+      hostname: post-storage-service
+      restartPolicy: Always

@@ -1,0 +1,55 @@
+---
+# Source: social-network/charts/social-graph-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: social-graph-service
+  name: social-graph-service
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: social-graph-service
+  template:
+    metadata:
+      labels:
+        service: social-graph-service
+        app: social-graph-service
+    spec: 
+      shareProcessNamespace: true
+      containers:
+
+      - name: "perf"
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add: 
+            - SYS_PTRACE
+        tty: true
+        stdin: true
+ 
+      - name: "social-graph-service"
+        image: docker.io/yg397/social-network-microservices:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9090
+        command: 
+        - SocialGraphService       
+        securityContext:
+          capabilities:
+            add: ["SYS_ADMIN"] 
+        volumeMounts:
+        - name: social-graph-service-config
+          mountPath: /social-network-microservices/config/jaeger-config.yml
+          subPath: jaeger-config.yml
+        - name: social-graph-service-config
+          mountPath: /social-network-microservices/config/service-config.json
+          subPath: service-config.json
+      volumes:
+      - name: social-graph-service-config
+        configMap:
+          name: social-graph-service
+      hostname: social-graph-service
+      restartPolicy: Always

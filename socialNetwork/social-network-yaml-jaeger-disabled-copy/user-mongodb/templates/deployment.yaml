@@ -1,0 +1,53 @@
+---
+# Source: social-network/charts/user-mongodb/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: user-mongodb
+  name: user-mongodb
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: user-mongodb
+  template:
+    metadata:
+      labels:
+        service: user-mongodb
+        app: user-mongodb
+    spec: 
+      shareProcessNamespace: true
+      containers:
+
+      - name: "perf"
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add: 
+            - SYS_PTRACE
+        tty: true
+        stdin: true
+ 
+      - name: "user-mongodb"
+        image: docker.io/library/mongo:4.4.6
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 27017
+        args:
+        - --config
+        - /social-network-microservices/config/mongod.conf        
+        securityContext:
+          capabilities:
+            add: ["SYS_ADMIN"]
+        volumeMounts:
+        - name: user-mongodb-config
+          mountPath: /social-network-microservices/config/mongod.conf
+          subPath: mongod.conf
+      volumes:
+      - name: user-mongodb-config
+        configMap:
+          name: user-mongodb
+      hostname: user-mongodb
+      restartPolicy: Always

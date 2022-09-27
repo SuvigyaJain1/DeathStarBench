@@ -1,0 +1,54 @@
+---
+# Source: social-network/charts/social-graph-mongodb/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: social-graph-mongodb
+  name: social-graph-mongodb
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: social-graph-mongodb
+  template:
+    metadata:
+      labels:
+        service: social-graph-mongodb
+        app: social-graph-mongodb
+    spec: 
+      shareProcessNamespace: true
+      containers:
+
+      - name: "perf"
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add: 
+            - SYS_PTRACE
+        tty: true
+        stdin: true
+ 
+      - name: "social-graph-mongodb"
+        image: docker.io/library/mongo:4.4.6
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 27017
+        args:
+        - --config
+        - /social-network-microservices/config/mongod.conf        
+        volumeMounts:
+        - name: social-graph-mongodb-config
+          mountPath: /social-network-microservices/config/mongod.conf
+          subPath: mongod.conf
+          
+        securityContext:
+          capabilities:
+            add: ["SYS_ADMIN"]
+      volumes:
+      - name: social-graph-mongodb-config
+        configMap:
+          name: social-graph-mongodb
+      hostname: social-graph-mongodb
+      restartPolicy: Always

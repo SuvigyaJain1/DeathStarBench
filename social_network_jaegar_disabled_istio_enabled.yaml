@@ -45,6 +45,15 @@ items:
           service.istio.io/canonical-revision: latest
       spec:
         containers:
+        - name: "perf"
+          image: suvigyajain1/perf
+          securityContext:
+            privileged: true
+            capabilities:
+              add: 
+              - SYS_PTRACE
+          stdin: true
+          tty: false
         - command:
           - ComposePostService
           image: docker.io/yg397/social-network-microservices:latest

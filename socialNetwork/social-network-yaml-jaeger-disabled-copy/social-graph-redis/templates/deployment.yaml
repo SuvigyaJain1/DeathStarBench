@@ -1,0 +1,52 @@
+---
+# Source: social-network/charts/social-graph-redis/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: social-graph-redis
+  name: social-graph-redis
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      service: social-graph-redis
+  template:
+    metadata:
+      labels:
+        service: social-graph-redis
+        app: social-graph-redis
+    spec: 
+      shareProcessNamespace: true
+      containers:
+
+      - name: "perf"
+        image: suvigyajain1/perf
+        securityContext:
+          privileged: true
+          capabilities:
+            add: 
+            - SYS_PTRACE
+        tty: true
+        stdin: true
+ 
+      - name: "social-graph-redis"
+        image: docker.io/library/redis:6.2.4
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6379
+        args:
+        - /social-network-microservices/config/redis.conf        
+        securityContext:
+          capabilities:
+            add: ["SYS_ADMIN"]
+        volumeMounts:
+        - name: social-graph-redis-config
+          mountPath: /social-network-microservices/config/redis.conf
+          subPath: redis.conf
+      volumes:
+      - name: social-graph-redis-config
+        configMap:
+          name: social-graph-redis
+      hostname: social-graph-redis
+      restartPolicy: Always
