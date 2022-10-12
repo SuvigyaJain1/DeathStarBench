@@ -103,7 +103,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -362,7 +362,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -624,7 +624,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -899,7 +899,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -1173,7 +1173,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -1450,7 +1450,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -1710,7 +1710,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -1972,7 +1972,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -2245,7 +2245,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -2541,7 +2541,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -2801,7 +2801,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -3063,7 +3063,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -3323,7 +3323,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -3582,7 +3582,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -3844,7 +3844,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -4106,7 +4106,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -4368,7 +4368,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -4628,7 +4628,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -4888,7 +4888,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -5150,7 +5150,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -5410,7 +5410,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -5672,7 +5672,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -5932,7 +5932,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -6194,7 +6194,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -6454,7 +6454,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -6713,7 +6713,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
@@ -6975,7 +6975,7 @@ items:
                 fieldPath: status.hostIP
           - name: PROXY_CONFIG
             value: |
-              {}
+              {"tracing":{"zipkin":{"address":"10.0.0.10:9411"}}}
           - name: ISTIO_META_POD_PORTS
             value: |-
               [
