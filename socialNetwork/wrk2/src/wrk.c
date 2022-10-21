@@ -6,6 +6,7 @@
 #include "hdr_histogram.h"
 #include "stats.h"
 #include "assert.h"
+#include "trace_marker.h"
 
 // Max recordable latency of 1 day
 #define MAX_LATENCY 24L * 60 * 60 * 1000000
@@ -636,8 +637,9 @@ static void socket_writeable(aeEventLoop *loop, int fd, void *data, int mask) {
 
             // Not yet time to send. Delay:
             aeDeleteFileEvent(loop, fd, AE_WRITABLE);
-            aeCreateTimeEvent(
-                    thread->loop, msec_to_wait, delay_request, c, NULL);
+            add_trace_marker("STARTING MARKER");
+            aeCreateTimeEvent(thread->loop, msec_to_wait, delay_request, c, NULL);
+            add_trace_marker("ENDING MARKER");
             return;
         }
     }
