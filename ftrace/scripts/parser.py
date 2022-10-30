@@ -4,6 +4,7 @@ pid : [Node1, Node2, Node3....]
 Node 1: 1 top level function_trace
 '''
 import re
+import os
 import json
 class Line:
 
@@ -67,38 +68,46 @@ class Node:
         return d
 
 
-trace_file = open('trace.txt', 'r')
 
-result = {}
+def main():
+    trace_folder = 'WITHOUT_ISTIO_WITHOUT_WORKLOAD'
+    num_runs=5
+    os.makedirs('parsedOutputs/'+trace_folder)
 
-def add_node_to_result(line):
-    
-    node = Node(line)
-    pid = line.pid
-    if pid not in result.keys():
-        result[pid] = [node]
-    else:
-        if not result[pid][-1].open_brackets == 0:
-            result[pid][-1].add_child_to_node(line)
-        else:
-            result[pid].append(node)
+    for i in range(num_runs):
+        trace_file = open(trace_folder+'/'+str(i)+'.txt', 'r')
+        result = {}
 
-for line in trace_file:
-    line = Line(line)
-    if not line.is_log_line:
-        continue
-    add_node_to_result(line)
+        def add_node_to_result(line):
+            
+            node = Node(line)
+            pid = line.pid
+            if pid not in result.keys():
+                result[pid] = [node]
+            else:
+                if not result[pid][-1].open_brackets == 0:
+                    result[pid][-1].add_child_to_node(line)
+                else:
+                    result[pid].append(node)
+
+        for line in trace_file:
+            line = Line(line)
+            if not line.is_log_line:
+                continue
+            add_node_to_result(line)
 
 
-for key in result:
-    new_result = []
-    for node in result[key]:
-        if node.open_brackets:
-            continue
-        new_result.append(node.to_dict())
-    result[key] = new_result
+        for key in result:
+            new_result = []
+            for node in result[key]:
+                if node.open_brackets:
+                    continue
+                new_result.append(node.to_dict())
+            result[key] = new_result
 
-with open('result.json', 'w') as fptr:
-    json.dump(result, indent = 2, fp=fptr)
+        with open('parsedOutputs/'+trace_folder+'/'+str(i)+'.json', 'w') as fptr:
+            json.dump(result, indent = 2, fp=fptr)
 
-trace_file.close()
+        trace_file.close()
+
+main()
