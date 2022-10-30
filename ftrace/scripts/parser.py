@@ -67,8 +67,6 @@ class Node:
         d["children"] = [i.to_dict() for i in self.children]
         return d
 
-
-
 def main():
     trace_folder = 'WITHOUT_ISTIO_WITHOUT_WORKLOAD'
     num_runs=5
@@ -109,5 +107,4 @@ def main():
             json.dump(result, indent = 2, fp=fptr)
 
         trace_file.close()
-
 main()

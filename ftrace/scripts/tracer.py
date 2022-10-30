@@ -1,8 +1,11 @@
+import pickle
 import os
 import subprocess
 import time
 
 FTRACE_HOME = '/sys/kernel/debug/tracing'
+
+PID_MAP = {}
 
 def output(command):
     print(command)
@@ -32,6 +35,7 @@ def append_to_file(filename, data):
 
 def add_ftrace_pid_filter(process_name):
     pids = get_pids(process_name)
+    PID_MAP[process_name] = pids
     file_path = f"{FTRACE_HOME}/set_ftrace_pid"
     append_to_file(file_path, pids)
 
@@ -62,6 +66,9 @@ def set_graph_depth(depth):
 def backup_trace(destination_path):
     trace_path = f"{FTRACE_HOME}/trace"
     output(f"cp {trace_path} {destination_path}")
+    with open(f"{destination_path}.pid.pickle", 'wb') as f:
+        pickle.dump(PID_MAP, f)
+
 
 def async_workload_trigger(wrk_command):
     exec(f"{wrk_command} &")
