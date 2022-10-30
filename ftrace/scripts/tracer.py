@@ -127,10 +127,10 @@ def main(CONFIG):
 
 if __name__ == '__main__':
     CONFIG = {}
-    CONFIG["name"] = "WITH_ISTIO_WITH_WORKLOAD"
-    CONFIG["num_traces"] = 5
+    CONFIG["name"] = "TMP"
+    CONFIG["num_traces"] = 3
     CONFIG["processes"] = ['memcached','redis','Service','mongo', 'nginx','proxy','pilot']
-    CONFIG["trace_time"] = 60
+    CONFIG["trace_time"] = 30
     CONFIG["with_workload"] = True
-    CONFIG["workload_command"] = '../../socialNetwork/wrk2/wrk -D fixed -t 1 -c 1 -d 60s -L -s ../../socialNetwork/wrk2/scripts/social-network/compose-post.lua http://localhost:31111/wrk2-api/post/compose -R 100'
+    CONFIG["workload_command"] = '../../socialNetwork/wrk2/wrk -D fixed -t 1 -c 1 -d 30s -L -s ../../socialNetwork/wrk2/scripts/social-network/compose-post.lua http://localhost:31111/wrk2-api/post/compose -R 100'
     main(CONFIG)
