@@ -122,12 +122,12 @@ def main(CONFIG):
         time.sleep(trace_time)
         turn_tracing_off()
 
-        output_file = f"{name}/{trace_number}"
+        output_file = f"{name}/{trace_number}.txt"
         backup_trace(output_file)
 
 if __name__ == '__main__':
     CONFIG = {}
-    CONFIG["name"] = "TMP"
+    CONFIG["name"] = "WITHOUT_ISTIO_WITH_WORKLOAD"
     CONFIG["num_traces"] = 3
     CONFIG["processes"] = ['memcached','redis','Service','mongo', 'nginx','proxy','pilot']
     CONFIG["trace_time"] = 30

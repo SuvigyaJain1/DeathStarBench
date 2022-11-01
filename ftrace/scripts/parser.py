@@ -68,8 +68,8 @@ class Node:
         return d
 
 def main():
-    trace_folder = 'WITHOUT_ISTIO_WITHOUT_WORKLOAD'
-    num_runs=5
+    trace_folder = 'WITH_ISTIO_WITHOUT_WORKLOAD'
+    num_runs=3
     os.makedirs('parsedOutputs/'+trace_folder)
 
     for i in range(num_runs):
