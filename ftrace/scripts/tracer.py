@@ -80,7 +80,7 @@ def set_options(options):
 def setup_ftrace(processes):
     turn_tracing_off()
     set_current_tracer("function_graph")
-    set_graph_depth("2")
+    set_graph_depth("0")
     clear_trace_log()
     clear_ftrace_pid_filter()
     set_options("userstacktrace")
@@ -108,6 +108,8 @@ def main(CONFIG):
     trace_time = CONFIG["trace_time"]
     with_workload = CONFIG["with_workload"]
     workload_command = CONFIG["workload_command"]
+    trace_delay = CONFIG["trace_delay"]
+
 
     output(f"mkdir {name}")
     setup_ftrace(processes)
@@ -118,19 +120,25 @@ def main(CONFIG):
         if with_workload:
             async_workload_trigger(workload_command)
         
+        time.sleep(trace_delay)
         turn_tracing_on()
         time.sleep(trace_time)
         turn_tracing_off()
 
         output_file = f"{name}/{trace_number}.txt"
         backup_trace(output_file)
+        time.sleep(WORKLOAD_DURATION - trace_time - trace_delay)
 
 if __name__ == '__main__':
     CONFIG = {}
+
+    WORKLOAD_DURATION = 100
     CONFIG["name"] = "WITHOUT_ISTIO_WITH_WORKLOAD"
     CONFIG["num_traces"] = 3
     CONFIG["processes"] = ['memcached','redis','Service','mongo', 'nginx','proxy','pilot']
-    CONFIG["trace_time"] = 30
+    CONFIG["trace_time"] = 60
     CONFIG["with_workload"] = True
-    CONFIG["workload_command"] = '../../socialNetwork/wrk2/wrk -D fixed -t 1 -c 1 -d 30s -L -s ../../socialNetwork/wrk2/scripts/social-network/compose-post.lua http://localhost:31111/wrk2-api/post/compose -R 100'
+    CONFIG["workload_duration"] = WORKLOAD_DURATION
+    CONFIG["workload_command"] = f'../../socialNetwork/wrk2/wrk -D fixed -t 1 -c 1 -d {WORKLOAD_DURATION}s -L -s ../../socialNetwork/wrk2/scripts/social-network/compose-post.lua http://localhost:31111/wrk2-api/post/compose -R 100'
+    CONFIG["trace_delay"] = 30
     main(CONFIG)

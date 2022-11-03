@@ -55,7 +55,7 @@ class Node:
             self.open_brackets -= 1
             self.time = line.time
         else: 
-            if line.closing_bracket:
+            if line.opening_bracket:
                 self.open_brackets += 1
             self.children.append(Node(line))
     
@@ -68,7 +68,7 @@ class Node:
         return d
 
 def main():
-    trace_folder = 'WITH_ISTIO_WITHOUT_WORKLOAD'
+    trace_folder = 'WITHOUT_ISTIO_WITH_WORKLOAD'
     num_runs=3
     os.makedirs('parsedOutputs/'+trace_folder)
 
