@@ -133,7 +133,7 @@ if __name__ == '__main__':
     CONFIG = {}
 
     WORKLOAD_DURATION = 100
-    CONFIG["name"] = "WITHOUT_ISTIO_WITH_WORKLOAD"
+    CONFIG["name"] = "WITH_ISTIO_WITH_WORKLOAD"
     CONFIG["num_traces"] = 3
     CONFIG["processes"] = ['memcached','redis','Service','mongo', 'nginx','proxy','pilot']
     CONFIG["trace_time"] = 60
