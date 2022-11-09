@@ -86,14 +86,14 @@ class Node:
     def to_dict(self):
         # return {"pid": self.pid, "time": self.time, }
         d = {}
-        d["function_name"] = self.function_name
+        d["function_name"] = self.function_name.strip(';').strip('{').strip()
         d["time"] = self.time
         d["children"] = [i.to_dict() for i in self.children]
         return d
 
 
 def main():
-    trace_folder = 'WITHOUT_ISTIO_WITH_WORKLOAD'
+    trace_folder = 'WITH_ISTIO_WITHOUT_WORKLOAD'
     num_runs=3
     os.makedirs('parsedOutputs/'+trace_folder, exist_ok=True)
 
