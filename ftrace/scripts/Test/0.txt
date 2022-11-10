@@ -1,0 +1,222 @@
+# tracer: function_graph
+#
+# CPU  TASK/PID         DURATION                  FUNCTION CALLS
+# |     |    |           |   |                     |   |   |   |
+ 7) openres-668122 | $ 260828971 us |              } /* schedule */
+ 7) openres-668122 | $ 260828974 us |            } /* schedule_hrtimeout_range_clock */
+ 7) openres-668122 | $ 260828974 us |          } /* schedule_hrtimeout_range */
+ 7) openres-668122 | $ 260828978 us |        } /* ep_poll */
+ 7) openres-668122 | $ 260828979 us |      } /* do_epoll_wait */
+ 7) openres-668122 | $ 260828980 us |    } /* __x64_sys_epoll_wait */
+ 7) openres-668122 | $ 260828981 us |  } /* do_syscall_64 */
+ 4) Compose-663992 | $ 266478928 us |              } /* schedule */
+ 4) Compose-663992 | $ 266478930 us |            } /* schedule_hrtimeout_range_clock */
+ 4) Compose-663992 | $ 266478931 us |          } /* schedule_hrtimeout_range */
+ 4) Compose-663992 | $ 266478931 us |        } /* poll_schedule_timeout.constprop.0 */
+ 4) Compose-663992 | $ 266478945 us |      } /* do_sys_poll */
+ 4) Compose-663992 | $ 266478946 us |    } /* __x64_sys_poll */
+ 4) Compose-663992 | $ 266478947 us |  } /* do_syscall_64 */
+ 6) TextSer-1489132 | $ 206487552 us |              } /* schedule */
+ 6) TextSer-1489132 | $ 206487554 us |            } /* schedule_hrtimeout_range_clock */
+ 6) TextSer-1489132 | $ 206487554 us |          } /* schedule_hrtimeout_range */
+ 6) TextSer-1489132 | $ 206487555 us |        } /* poll_schedule_timeout.constprop.0 */
+ 6) TextSer-1489132 | $ 206487571 us |      } /* do_sys_poll */
+ 6) TextSer-1489132 | $ 206487572 us |    } /* __x64_sys_poll */
+ 6) TextSer-1489132 | $ 206487573 us |  } /* do_syscall_64 */
+ 0) UserSer-1489146 | $ 206492068 us |              } /* schedule */
+ 0) UserSer-1489146 | $ 206492070 us |            } /* schedule_hrtimeout_range_clock */
+ 0) UserSer-1489146 | $ 206492070 us |          } /* schedule_hrtimeout_range */
+ 0) UserSer-1489146 | $ 206492071 us |        } /* poll_schedule_timeout.constprop.0 */
+ 0) UserSer-1489146 | $ 206492088 us |      } /* do_sys_poll */
+ 0) UserSer-1489146 | $ 206492089 us |    } /* __x64_sys_poll */
+ 0) UserSer-1489146 | $ 206492090 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 4) Compose-663992 => MediaSe-1489147
+ ------------------------------------------
+
+ 4) MediaSe-1489147 | $ 206492024 us |              } /* schedule */
+ 4) MediaSe-1489147 | $ 206492025 us |            } /* schedule_hrtimeout_range_clock */
+ 4) MediaSe-1489147 | $ 206492025 us |          } /* schedule_hrtimeout_range */
+ 4) MediaSe-1489147 | $ 206492026 us |        } /* poll_schedule_timeout.constprop.0 */
+ 4) MediaSe-1489147 | $ 206492039 us |      } /* do_sys_poll */
+ 4) MediaSe-1489147 | $ 206492040 us |    } /* __x64_sys_poll */
+ 4) MediaSe-1489147 | $ 206492041 us |  } /* do_syscall_64 */
+ 5) UniqueI-1489148 | $ 206492181 us |              } /* schedule */
+ 5) UniqueI-1489148 | $ 206492183 us |            } /* schedule_hrtimeout_range_clock */
+ 5) UniqueI-1489148 | $ 206492183 us |          } /* schedule_hrtimeout_range */
+ 5) UniqueI-1489148 | $ 206492183 us |        } /* poll_schedule_timeout.constprop.0 */
+ 5) UniqueI-1489148 | $ 206492198 us |      } /* do_sys_poll */
+ 5) UniqueI-1489148 | $ 206492198 us |    } /* __x64_sys_poll */
+ 5) UniqueI-1489148 | $ 206492200 us |  } /* do_syscall_64 */
+ 2) UserMen-1489149 | $ 206488702 us |              } /* schedule */
+ 2) UserMen-1489149 | $ 206488704 us |            } /* schedule_hrtimeout_range_clock */
+ 2) UserMen-1489149 | $ 206488704 us |          } /* schedule_hrtimeout_range */
+ 2) UserMen-1489149 | $ 206488705 us |        } /* poll_schedule_timeout.constprop.0 */
+ 2) UserMen-1489149 | $ 206488718 us |      } /* do_sys_poll */
+ 2) UserMen-1489149 | $ 206488718 us |    } /* __x64_sys_poll */
+ 2) UserMen-1489149 | $ 206488719 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 0) UserSer-1489146 => UrlShor-1489173
+ ------------------------------------------
+
+ 0) UrlShor-1489173 | $ 206491349 us |              } /* schedule */
+ 0) UrlShor-1489173 | $ 206491350 us |            } /* schedule_hrtimeout_range_clock */
+ 0) UrlShor-1489173 | $ 206491350 us |          } /* schedule_hrtimeout_range */
+ 0) UrlShor-1489173 | $ 206491351 us |        } /* poll_schedule_timeout.constprop.0 */
+ 0) UrlShor-1489173 | $ 206491365 us |      } /* do_sys_poll */
+ 0) UrlShor-1489173 | $ 206491365 us |    } /* __x64_sys_poll */
+ 0) UrlShor-1489173 | $ 206491366 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 4) MediaSe-1489147 => PostSto-1489163
+ ------------------------------------------
+
+ 4) PostSto-1489163 | $ 206488815 us |              } /* schedule */
+ 4) PostSto-1489163 | $ 206488816 us |            } /* schedule_hrtimeout_range_clock */
+ 4) PostSto-1489163 | $ 206488817 us |          } /* schedule_hrtimeout_range */
+ 4) PostSto-1489163 | $ 206488817 us |        } /* poll_schedule_timeout.constprop.0 */
+ 4) PostSto-1489163 | $ 206488839 us |      } /* do_sys_poll */
+ 4) PostSto-1489163 | $ 206488839 us |    } /* __x64_sys_poll */
+ 4) PostSto-1489163 | $ 206488840 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 6) TextSer-1489132 => UserTim-1489165
+ ------------------------------------------
+
+ 6) UserTim-1489165 | $ 206488336 us |              } /* schedule */
+ 6) UserTim-1489165 | $ 206488337 us |            } /* schedule_hrtimeout_range_clock */
+ 6) UserTim-1489165 | $ 206488338 us |          } /* schedule_hrtimeout_range */
+ 6) UserTim-1489165 | $ 206488338 us |        } /* poll_schedule_timeout.constprop.0 */
+ 6) UserTim-1489165 | $ 206488352 us |      } /* do_sys_poll */
+ 6) UserTim-1489165 | $ 206488352 us |    } /* __x64_sys_poll */
+ 6) UserTim-1489165 | $ 206488353 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 0) UrlShor-1489173 => HomeTim-1489164
+ ------------------------------------------
+
+ 0) HomeTim-1489164 | $ 206487987 us |              } /* schedule */
+ 0) HomeTim-1489164 | $ 206487989 us |            } /* schedule_hrtimeout_range_clock */
+ 0) HomeTim-1489164 | $ 206487989 us |          } /* schedule_hrtimeout_range */
+ 0) HomeTim-1489164 | $ 206487989 us |        } /* poll_schedule_timeout.constprop.0 */
+ 0) HomeTim-1489164 | $ 206488008 us |      } /* do_sys_poll */
+ 0) HomeTim-1489164 | $ 206488008 us |    } /* __x64_sys_poll */
+ 0) HomeTim-1489164 | $ 206488009 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 5) UniqueI-1489148 => SocialG-1489166
+ ------------------------------------------
+
+ 5) SocialG-1489166 | $ 206488268 us |              } /* schedule */
+ 5) SocialG-1489166 | $ 206488269 us |            } /* schedule_hrtimeout_range_clock */
+ 5) SocialG-1489166 | $ 206488270 us |          } /* schedule_hrtimeout_range */
+ 5) SocialG-1489166 | $ 206488270 us |        } /* poll_schedule_timeout.constprop.0 */
+ 5) SocialG-1489166 | $ 206488285 us |      } /* do_sys_poll */
+ 5) SocialG-1489166 | $ 206488285 us |    } /* __x64_sys_poll */
+ 5) SocialG-1489166 | $ 206488286 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 4) PostSto-1489163 => MediaSe-666274
+ ------------------------------------------
+
+ 4) MediaSe-666274 | $ 216403193 us |              } /* schedule */
+ 4) MediaSe-666274 | $ 216403195 us |            } /* schedule_hrtimeout_range_clock */
+ 4) MediaSe-666274 | $ 216403195 us |          } /* schedule_hrtimeout_range */
+ 4) MediaSe-666274 | $ 216403196 us |        } /* poll_schedule_timeout.constprop.0 */
+ 4) MediaSe-666274 | $ 216403207 us |      } /* do_sys_poll */
+ 4) MediaSe-666274 | $ 216403208 us |    } /* __x64_sys_poll */
+ 4) MediaSe-666274 | $ 216403219 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 6) UserTim-1489165 => TextSer-667456
+ ------------------------------------------
+
+ 6) TextSer-667456 | $ 216415710 us |              } /* schedule */
+ 6) TextSer-667456 | $ 216415711 us |            } /* schedule_hrtimeout_range_clock */
+ 6) TextSer-667456 | $ 216415712 us |          } /* schedule_hrtimeout_range */
+ 6) TextSer-667456 | $ 216415712 us |        } /* poll_schedule_timeout.constprop.0 */
+ 6) TextSer-667456 | $ 216415724 us |      } /* do_sys_poll */
+ 6) TextSer-667456 | $ 216415725 us |    } /* __x64_sys_poll */
+ 6) TextSer-667456 | $ 216415726 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 7) openres-668122 => UserSer-665207
+ ------------------------------------------
+
+ 7) UserSer-665207 | $ 216403825 us |              } /* schedule */
+ 7) UserSer-665207 | $ 216403826 us |            } /* schedule_hrtimeout_range_clock */
+ 7) UserSer-665207 | $ 216403827 us |          } /* schedule_hrtimeout_range */
+ 7) UserSer-665207 | $ 216403827 us |        } /* poll_schedule_timeout.constprop.0 */
+ 7) UserSer-665207 | $ 216403839 us |      } /* do_sys_poll */
+ 7) UserSer-665207 | $ 216403840 us |    } /* __x64_sys_poll */
+ 7) UserSer-665207 | $ 216403841 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 4) MediaSe-666274 => UniqueI-667501
+ ------------------------------------------
+
+ 4) UniqueI-667501 | $ 216403465 us |              } /* schedule */
+ 4) UniqueI-667501 | $ 216403465 us |            } /* schedule_hrtimeout_range_clock */
+ 4) UniqueI-667501 | $ 216403466 us |          } /* schedule_hrtimeout_range */
+ 4) UniqueI-667501 | $ 216403466 us |        } /* poll_schedule_timeout.constprop.0 */
+ 4) UniqueI-667501 | $ 216403482 us |      } /* do_sys_poll */
+ 4) UniqueI-667501 | $ 216403482 us |    } /* __x64_sys_poll */
+ 4) UniqueI-667501 | $ 216403483 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 6) TextSer-667456 => UrlShor-664771
+ ------------------------------------------
+
+ 6) UrlShor-664771 | $ 216377555 us |              } /* schedule */
+ 6) UrlShor-664771 | $ 216377556 us |            } /* schedule_hrtimeout_range_clock */
+ 6) UrlShor-664771 | $ 216377557 us |          } /* schedule_hrtimeout_range */
+ 6) UrlShor-664771 | $ 216377557 us |        } /* poll_schedule_timeout.constprop.0 */
+ 6) UrlShor-664771 | $ 216377569 us |      } /* do_sys_poll */
+ 6) UrlShor-664771 | $ 216377570 us |    } /* __x64_sys_poll */
+ 6) UrlShor-664771 | $ 216377571 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 2) UserMen-1489149 => UserMen-664803
+ ------------------------------------------
+
+ 2) UserMen-664803 | $ 216404619 us |              } /* schedule */
+ 2) UserMen-664803 | $ 216404621 us |            } /* schedule_hrtimeout_range_clock */
+ 2) UserMen-664803 | $ 216404622 us |          } /* schedule_hrtimeout_range */
+ 2) UserMen-664803 | $ 216404622 us |        } /* poll_schedule_timeout.constprop.0 */
+ 2) UserMen-664803 | $ 216404638 us |      } /* do_sys_poll */
+ 2) UserMen-664803 | $ 216404638 us |    } /* __x64_sys_poll */
+ 2) UserMen-664803 | $ 216404639 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 0) HomeTim-1489164 => PostSto-666808
+ ------------------------------------------
+
+ 0) PostSto-666808 | $ 216391629 us |              } /* schedule */
+ 0) PostSto-666808 | $ 216391630 us |            } /* schedule_hrtimeout_range_clock */
+ 0) PostSto-666808 | $ 216391631 us |          } /* schedule_hrtimeout_range */
+ 0) PostSto-666808 | $ 216391631 us |        } /* poll_schedule_timeout.constprop.0 */
+ 0) PostSto-666808 | $ 216391646 us |      } /* do_sys_poll */
+ 0) PostSto-666808 | $ 216391646 us |    } /* __x64_sys_poll */
+ 0) PostSto-666808 | $ 216391647 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 4) UniqueI-667501 => UserTim-665421
+ ------------------------------------------
+
+ 4) UserTim-665421 | $ 216391227 us |              } /* schedule */
+ 4) UserTim-665421 | $ 216391228 us |            } /* schedule_hrtimeout_range_clock */
+ 4) UserTim-665421 | $ 216391228 us |          } /* schedule_hrtimeout_range */
+ 4) UserTim-665421 | $ 216391229 us |        } /* poll_schedule_timeout.constprop.0 */
+ 4) UserTim-665421 | $ 216391240 us |      } /* do_sys_poll */
+ 4) UserTim-665421 | $ 216391241 us |    } /* __x64_sys_poll */
+ 4) UserTim-665421 | $ 216391242 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 0) PostSto-666808 => HomeTim-664024
+ ------------------------------------------
+
+ 0) HomeTim-664024 | $ 216391415 us |              } /* schedule */
+ 0) HomeTim-664024 | $ 216391415 us |            } /* schedule_hrtimeout_range_clock */
+ 0) HomeTim-664024 | $ 216391416 us |          } /* schedule_hrtimeout_range */
+ 0) HomeTim-664024 | $ 216391416 us |        } /* poll_schedule_timeout.constprop.0 */
+ 0) HomeTim-664024 | $ 216391435 us |      } /* do_sys_poll */
+ 0) HomeTim-664024 | $ 216391436 us |    } /* __x64_sys_poll */
+ 0) HomeTim-664024 | $ 216391437 us |  } /* do_syscall_64 */
+ ------------------------------------------
+ 0) HomeTim-664024 => SocialG-667379
+ ------------------------------------------
+
+ 0) SocialG-667379 | $ 216388068 us |              } /* schedule */
+ 0) SocialG-667379 | $ 216388069 us |            } /* schedule_hrtimeout_range_clock */
+ 0) SocialG-667379 | $ 216388069 us |          } /* schedule_hrtimeout_range */
+ 0) SocialG-667379 | $ 216388070 us |        } /* poll_schedule_timeout.constprop.0 */
+ 0) SocialG-667379 | $ 216388084 us |      } /* do_sys_poll */
+ 0) SocialG-667379 | $ 216388084 us |    } /* __x64_sys_poll */
+ 0) SocialG-667379 | $ 216388085 us |  } /* do_syscall_64 */

@@ -128,10 +128,9 @@ def main(CONFIG):
     trace_delay = CONFIG["trace_delay"]
 
     output(f"mkdir {name}")
-    setup_ftrace(processes)
 
     for trace_number in range(num_traces):
-        
+        setup_ftrace(processes)
         clear_trace_log()
         clear_os_cache()
 
@@ -161,11 +160,11 @@ if __name__ == '__main__':
         # tracing delay is run after turning on trace and before running workload/trace sleep.
 
     WORKLOAD_DURATION = 60 # Used only if with_workloads = True
-    CONFIG["name"] = "WITHOUT_ISTIO_WITHOUT_WORKLOAD"
+    CONFIG["name"] = "WITH_ISTIO_WITH_WORKLOAD"
     CONFIG["num_traces"] = 5
     CONFIG["processes"] = ['memcached','redis','Service','mongo', 'nginx','proxy','pilot']
     CONFIG["trace_time"] = 60 # Used only if with_workloads = False
-    CONFIG["with_workload"] = False
+    CONFIG["with_workload"] = True
     CONFIG["workload_duration"] = WORKLOAD_DURATION
     CONFIG["workload_command"] = f'../../socialNetwork/wrk2/wrk -D fixed -t 1 -c 1 -d {WORKLOAD_DURATION}s -L -s ../../socialNetwork/wrk2/scripts/social-network/compose-post.lua http://localhost:31111/wrk2-api/post/compose -R 100'
     CONFIG["trace_delay"] = 1
