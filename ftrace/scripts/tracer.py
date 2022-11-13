@@ -38,14 +38,20 @@ def add_ftrace_pid_filter(process_name):
     PID_MAP[process_name] = pids
     file_path = f"{FTRACE_HOME}/set_ftrace_pid"
     append_to_file(file_path, pids)
+    file_path = f"{FTRACE_HOME}/set_event_pid"
+    append_to_file(file_path, pids)
 
 def clear_ftrace_pid_filter():
     file_path = f"{FTRACE_HOME}/set_ftrace_pid"
+    write_to_file(file_path, "")
+    file_path = f"{FTRACE_HOME}/set_event_pid"
     write_to_file(file_path, "")
 
 def turn_tracing_on():
     file_path = f"{FTRACE_HOME}/tracing_on"
     write_to_file(file_path, "1")
+    file_path = f"{FTRACE_HOME}/set_event"
+    write_to_file(file_path, "syscalls:sys_exit_vfork\nsyscalls:sys_enter_vfork\nsyscalls:sys_exit_fork\nsyscalls:sys_enter_fork\nsched:sched_process_fork")
 
 def turn_tracing_off():
     file_path = f"{FTRACE_HOME}/tracing_on"
@@ -98,6 +104,7 @@ def setup_ftrace(processes):
     set_options("display-graph")
     set_options("funcgraph-proc")
     set_options("function-fork")
+    set_options("event-fork")
     for process in processes:
         add_ftrace_pid_filter(process)
 
