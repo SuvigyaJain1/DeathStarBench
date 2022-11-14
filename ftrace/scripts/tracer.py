@@ -51,7 +51,7 @@ def turn_tracing_on():
     file_path = f"{FTRACE_HOME}/tracing_on"
     write_to_file(file_path, "1")
     file_path = f"{FTRACE_HOME}/set_event"
-    write_to_file(file_path, "syscalls:sys_exit_vfork\nsyscalls:sys_enter_vfork\nsyscalls:sys_exit_fork\nsyscalls:sys_enter_fork\nsched:sched_process_fork")
+    write_to_file(file_path, "syscalls:sys_exit_vfork\nsyscalls:sys_enter_vfork\nsyscalls:sys_exit_fork\nsyscalls:sys_enter_fork\nsched:sched_process_forksched:sched_process_exec\nsched:sched_kthread_work_execute_end\nsched:sched_kthread_work_execute_start\nsyscalls:sys_exit_execve\nsyscalls:sys_enter_execve")
 
 def turn_tracing_off():
     file_path = f"{FTRACE_HOME}/tracing_on"
