@@ -48,10 +48,10 @@ def clear_ftrace_pid_filter():
     write_to_file(file_path, "")
 
 def turn_tracing_on():
+    file_path = f"{FTRACE_HOME}/set_event"
+    write_to_file(file_path, "syscalls:sys_exit_vfork\nsyscalls:sys_enter_vfork\nsyscalls:sys_exit_fork\nsyscalls:sys_enter_fork\nsched:sched_process_fork\nsched:sched_process_exec\nsyscalls:sys_exit_execve\nsyscalls:sys_enter_execve\nsched:sched_kthread_stop")
     file_path = f"{FTRACE_HOME}/tracing_on"
     write_to_file(file_path, "1")
-    file_path = f"{FTRACE_HOME}/set_event"
-    write_to_file(file_path, "syscalls:sys_exit_vfork\nsyscalls:sys_enter_vfork\nsyscalls:sys_exit_fork\nsyscalls:sys_enter_fork\nsched:sched_process_forksched:sched_process_exec\nsched:sched_kthread_work_execute_end\nsched:sched_kthread_work_execute_start\nsyscalls:sys_exit_execve\nsyscalls:sys_enter_execve")
 
 def turn_tracing_off():
     file_path = f"{FTRACE_HOME}/tracing_on"
@@ -137,8 +137,10 @@ def main(CONFIG):
     output(f"mkdir {name}")
 
     for trace_number in range(num_traces):
-        setup_ftrace(processes)
+        turn_tracing_off()
         clear_trace_log()
+
+        setup_ftrace(processes)
         clear_os_cache()
 
         turn_tracing_on()
@@ -167,11 +169,12 @@ if __name__ == '__main__':
         # tracing delay is run after turning on trace and before running workload/trace sleep.
 
     WORKLOAD_DURATION = 60 # Used only if with_workloads = True
-    CONFIG["name"] = "WITH_ISTIO_WITH_WORKLOAD"
+    CONFIG["name"] = "WITH_ISTIO_WITHOUT_WORKLOAD"
     CONFIG["num_traces"] = 5
-    CONFIG["processes"] = ['memcached','redis','Service','mongo', 'nginx','proxy','pilot']
+    CONFIG["processes"] = ['memcached','redis','Service','mongo', 'nginx','proxy','pilot','kube']
+    # CONFIG["processes"] = ['proxy']
     CONFIG["trace_time"] = 60 # Used only if with_workloads = False
-    CONFIG["with_workload"] = True
+    CONFIG["with_workload"] = False
     CONFIG["workload_duration"] = WORKLOAD_DURATION
     CONFIG["workload_command"] = f'../../socialNetwork/wrk2/wrk -D fixed -t 1 -c 1 -d {WORKLOAD_DURATION}s -L -s ../../socialNetwork/wrk2/scripts/social-network/compose-post.lua http://localhost:31111/wrk2-api/post/compose -R 100'
     CONFIG["trace_delay"] = 1
