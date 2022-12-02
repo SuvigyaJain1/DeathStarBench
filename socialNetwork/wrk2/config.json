@@ -1,0 +1,5 @@
+[
+{"distribution": "fixed", "threads": 8, "connections": 16, "duration": 30, "script": "compose-post.lua", "url": "http://159.223.197.199:31111/wrk2-api", "rps": 100},
+{"distribution": "fixed", "threads": 8, "connections": 16, "duration": 30, "script": "compose-post.lua", "url": "http://159.223.197.199:31111/wrk2-api", "rps": 1000},
+{"distribution": "fixed", "threads": 8, "connections": 16, "duration": 30, "script": "compose-post.lua", "url": "http://159.223.197.199:31111/wrk2-api", "rps": 10000}
+]
